@@ -16,3 +16,9 @@
 - **HTML/CSS**: For the structure and styling of the website.
 - **Bootstrap**: CSS framework for responsive design.
 - **JavaScript**: For interactive features on the frontend.
+
+### Homepage
+![Homepage](board1.PNG)
+
+### Girlfriend Listing
+![Girlfriend Listing](board2.PNG)

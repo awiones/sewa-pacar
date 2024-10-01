@@ -34,14 +34,15 @@
 To run this project locally, follow these steps:
 
 1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/rent-a-girlfriend.git
-   ```
+```bash
+https://github.com/awiones/sewa-pacar.git
+```
 
 2. **Navigate to the project directory**:
-   ```bash
-   cd rent-a-girlfriend
-   ```
+```bash
+cd rent-a-girlfriend
+```
+or maybe just download it at release
 
 3. **Set up MySQL**:
    - Use **XAMPP** or another local server (like MAMP, WAMP, etc.).

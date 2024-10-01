@@ -1,0 +1,87 @@
+CREATE DATABASE IF NOT EXISTS rentagf_db;
+USE rentagf_db;
+
+CREATE TABLE girlfriends (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL, 
+    image_url VARCHAR(255) NOT NULL,    
+    description TEXT NOT NULL,          
+    personality TEXT NOT NULL,    
+    rules TEXT,            
+    location VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,       
+    rating INT CHECK (rating >= 1 AND rating <= 5),                       
+    rating_count INT DEFAULT 0,  
+    rating_total INT DEFAULT 0,
+    direct VARCHAR(255),  
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE girlfriends ADD COLUMN status VARCHAR(50);
+
+INSERT INTO girlfriends (name, age, image_url, description, personality, rules, location, price, rating, rating_count, rating_total, direct)
+VALUES 
+('Chizuru Mizuhara', 22, 'https://pbs.twimg.com/media/F2MPGnVbcAAY2XD?format=jpg&name=900x900', 
+    'A professional, intelligent, and beautiful rental girlfriend. Chizuru maintains a perfect girlfriend image during her rentals.',
+    'Confident, caring, and a bit reserved.',
+    '1. No physical contact without consent.\n2. Keep the relationship strictly professional.\n3. Maintain boundaries outside rental hours.',
+    'Tokyo', 180.00, 5, 100, 500, 'https://character.ai/chat/2g9l1X_9Yt-BCNPWVXVCGMhIXEyXTbWCLOlGrqtXAM8'),
+
+('Ruka Sarashina', 19, 'https://i.pinimg.com/736x/52/69/63/5269635a9d5e3be7eba923f0f37a1bb7.jpg', 
+    'Ruka is energetic and bubbly, with a serious determination to find true love. She is more emotional and expressive compared to others.',
+    'Energetic, passionate, and a bit clingy.',
+    '1. Be honest about your feelings.\n2. No public displays of affection without prior discussion.\n3. Respect her boundaries at all times.',
+    'Osaka', 150.00, 4, 75, 300, 'https://character.ai/chat/HUgX1T4Huj3QJVBKsBO8f3_Iem3cQCFp6zPyj4nDjOc'),
+
+('Sumi Sakurasawa', 18, 'https://i.pinimg.com/564x/cf/0a/7a/cf0a7a01f5454a71a50479991017085a.jpg', 
+    'Sumi is a shy and soft-spoken girl, new to being a rental girlfriend. She is very considerate and aims to improve her communication skills.',
+    'Shy, sweet, and hardworking.',
+    '1. Please be patient and understanding.\n2. Encourage her to open up.\n3. No forcing her into uncomfortable situations.',
+    'Kyoto', 120.00, 5, 50, 250, 'https://character.ai/chat/wLz7x66lEFyRLktwXHhRMc07tVtRiSh0VQ-hP4pHvKo'),
+
+('Mini Yaemori', 20, 'https://thicc-uwu.mywaifulist.moe/waifus/mini-yaemori-rent-a-girlfriend/gY5VJJR44384RU7nPxNitiH1ZnHFfp6x0RnGlitm.jpg?class=thumbnail', 
+    'Mini is energetic and cheerful, often taking the role of a playful and mischievous character in her group. She loves to bring fun into the relationship.',
+    'Upbeat, playful, and supportive.',
+    '1. Be open to spontaneous adventures.\n2. Keep things light-hearted and fun.\n3. No serious commitments or confessions during rentals.',
+    'Shibuya', 160.00, 4, 60, 240, 'https://character.ai/chat/whNIJT-oQSnXJ3G2mJS4SlwKshYCyUTYZX2iakFjcB8');
+
+('Mami Nanami', 24, 'https://i.pinimg.com/564x/0e/91/44/0e9144cad39dd1ee4baffc89990808c1.jpg', 
+ 'Mami is a charming and elegant individual who often captivates those around her with her grace and poise. She enjoys deep conversations and emotional connections.',
+ 'Charming, empathetic, and thoughtful.',
+ '1. Respect her space and time.\n2. Engage in meaningful conversations.\n3. No pressure for romantic commitments during rentals.',
+ 'Shinjuku', 0.00, 0, 0, 0, 'https://character.ai/chat/OyB-tpRQBFc3AYjzaxHriqhTh24Kwey2Cj_X33K5mJI');
+
+--users (Different from gf)
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+--review (Differentfrom gf or users)
+
+CREATE TABLE reviews (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    girlfriend_name VARCHAR(100) NOT NULL,
+    reviewer_name VARCHAR(100) NOT NULL, 
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    review_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+INSERT INTO reviews (girlfriend_name, reviewer_name, rating, review_text) VALUES
+('Chizuru Mizuhara', 'Haruto Tanaka', 5, 'Chizuru is amazing! Professional and very sweet. Highly recommended!'),
+('Chizuru Mizuhara', 'Sakura Yamada', 4, 'Great experience, she is very charming.'),
+('Sumi Sakurasawa', 'Riku Kobayashi', 5, 'Sumi is adorable and so shy. Loved spending time with her!'),
+('Sumi Sakurasawa', 'Yui Nakamura', 4, 'She is a bit quiet, but very kind and attentive.'),
+('Ruka Sarashina', 'Kaito Suzuki', 4, 'Ruka is energetic and fun. Always keeps the mood light!'),
+('Ruka Sarashina', 'Aoi Matsumoto', 3, 'She is nice, but a little too clingy for my taste.'),
+('Mini Yaemori', 'Nori Takahashi', 5, 'Mini is just perfect! A great girlfriend experience!'),
+('Mini Yaemori', 'Emi Watanabe', 4, 'Had a good time with her. She is very fun and outgoing!'),
+('Chizuru Mizuhara', 'Ren Saito', 5, 'Chizuru is professional and really knows how to make you feel special.'),
+('Sumi Sakurasawa', 'Miki Ueno', 5, 'Sumi is very gentle and sweet. I had a wonderful time!');

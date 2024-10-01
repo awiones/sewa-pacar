@@ -17,8 +17,7 @@
 - **Bootstrap**: CSS framework for responsive design.
 - **JavaScript**: For interactive features on the frontend.
 
-### Homepage
-![Homepage](board1.PNG)
+### Preview
+<img src="board1.PNG" alt="Homepage" style="width: 100%; height: auto;">
+<img src="board2.PNG" alt="Girlfriend Listing" style="width: 100%; height: auto;">
 
-### Girlfriend Listing
-![Girlfriend Listing](board2.PNG)

@@ -30,6 +30,49 @@
 <img src="board1.PNG" alt="Homepage" style="width: 100%; height: auto;">
 <img src="board2.PNG" alt="Girlfriend Listing" style="width: 100%; height: auto;">
 
+## Getting Started
+To run this project locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/rent-a-girlfriend.git
+   ```
+
+2. **Navigate to the project directory**:
+   ```bash
+   cd rent-a-girlfriend
+   ```
+
+3. **Set up MySQL**:
+   - Use **XAMPP** or another local server (like MAMP, WAMP, etc.).
+   - Open **XAMPP Control Panel** and start the **Apache** and **MySQL** modules.
+   - Open your browser and navigate to `http://localhost/phpmyadmin`.
+
+4. **Import the database**:
+   - Open the `sql.txt` file included in this repository.
+   - Copy the SQL commands from `sql.txt`.
+   - In **phpMyAdmin**, create a new database (e.g., `rent_a_girlfriend`).
+   - Select the newly created database and go to the **SQL** tab.
+   - Paste the copied SQL commands into the SQL query window and click **Go** to execute.
+
+5. **Configure the database connection**:
+   - Open the `backend/configure.php` file.
+   - Update the database credentials to match your setup:
+     ```php
+     $host = 'localhost'; // usually 'localhost' for XAMPP
+     $port = 3306; // default MySQL port
+     $db = 'rent_a_girlfriend'; // the name of your database
+     $user = 'root'; // default username for XAMPP
+     $pass = ''; // default password for XAMPP (usually empty)
+     ```
+
+6. **Access the application**:
+   Open your browser and go to:
+   ```
+   http://localhost/rent-a-girlfriend/
+   ```
+
+
 ## Future Improvements
 - Implement user authentication with password hashing for added security.
 - Enhance the user interface for better user experience.

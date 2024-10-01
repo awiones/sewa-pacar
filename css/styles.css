@@ -1,0 +1,500 @@
+/* General styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff0f6; /* Soft pink background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    color: #d63384;
+    text-align: center;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #ff80ab;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff;
+}
+
+.nav-link {
+    color: #fff;
+    transition: text-shadow 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffd1dc; 
+    text-shadow: 0 0 5px #ffffff, 
+                 0 0 10px #ffffff,
+                 0 0 15px #d63384,
+                 0 0 20px #d63384;
+}
+
+/* Card styling */
+.container {
+    padding: 20px; /* Add padding to the container */
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px; /* Add more gap for better spacing */
+}
+
+.card {
+    background-color: #fff;
+    border: none;
+    width: 300px; /* Fixed width for consistency */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 20px;
+    padding: 15px; /* Adds consistent padding to the card */
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h5 {
+    color: #d63384;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.25rem; /* Consistent font size for titles */
+    font-weight: bold; /* Make title bold */
+    text-align: center; /* Center align the title */
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow the card body to grow */
+    padding: 10px;
+}
+
+/* Consistent text styles for all card text */
+.card-body p {
+    margin-bottom: 5px;
+    font-size: 0.9rem; /* Consistent font size */
+    color: #333; /* Dark color for text */
+    line-height: 1.5; /* Consistent line spacing */
+    text-align: left; /* Align text to the left */
+}
+
+.rating {
+    margin-top: auto; /* Push rating to the bottom */
+    margin-bottom: 10px;
+    text-align: center; /* Center align rating stars */
+}
+
+.rating i {
+    color: #ffcc00; /* Color for stars */
+}
+
+.btn-primary {
+    background-color: #ff66a3;
+    border: none;
+    margin-top: 10px; /* Space between text and button */
+    padding: 10px; /* Add padding for button */
+    border-radius: 5px; /* Round button edges */
+}
+
+.btn-primary:hover {
+    background-color: #ff99c2;
+}
+
+/* Layout for 3 cards per row */
+.card-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    width: 30%;
+}
+
+@media (max-width: 1200px) {
+    .card {
+        width: 32%;
+    }
+}
+
+@media (max-width: 992px) {
+    .card {
+        width: 48%;
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: 100%;
+    }
+}
+
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #fff; /* White background for the sidebar */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the sidebar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space below the sidebar */
+    margin-top: 20px; /* Add this line for space above the sidebar */
+}
+
+
+/* Sidebar headings */
+.sidebar h2 {
+    color: #d63384; /* Heading color */
+    margin-bottom: 15px; /* Space below the heading */
+    font-size: 1.5rem; /* Font size for headings */
+    border-bottom: 2px solid #d63384; /* Underline effect */
+    padding-bottom: 5px; /* Space below the underline */
+}
+
+/* List group styling */
+.list-group {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+}
+
+/* List item styling */
+.list-group-item {
+    background-color: #f8f9fa; /* Light background for list items */
+    border: 1px solid #e0e0e0; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: 10px; /* Space between items */
+    padding: 10px; /* Padding inside each item */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+/* Hover effect for list items */
+.list-group-item:hover {
+    background-color: #ffe6f2; /* Light pink background on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Custom scrollbar styles for WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f0f0; /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff69b4; /* Color of the scrollbar thumb (pink) */
+    border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff1493; /* Darker pink on hover */
+}
+
+/* Custom scrollbar styles for Firefox */
+* {
+    scrollbar-width: thin; /* Use a thin scrollbar */
+    scrollbar-color: #ff69b4 #f0f0f0; /* thumb color and track color */
+}
+
+/* styles.css */
+
+/* Custom styles for carousel */
+.carousel-item img {
+    width: 1600px;  /* Set the width to 1600 pixels */
+    height: 400px;  /* Set the height to 400 pixels */
+    object-fit: cover;  /* Ensures the image covers the area without distortion */
+    display: block;  /* Ensures smooth transition without delays */
+    -webkit-transition: opacity 0.2s ease-in-out;  /* Smooth transition for Webkit browsers */
+    -moz-transition: opacity 0.2s ease-in-out;  /* Smooth transition for Firefox */
+    -o-transition: opacity 0.2s ease-in-out;  /* Smooth transition for Opera */
+    transition: opacity 0.2s ease-in-out;  /* Smooth transition for other browsers */
+  }
+  
+  /* Prevent flash of blank when transitioning */
+  .carousel-item {
+    transition: transform 0.5s ease;  /* Smooth transition effect */
+  }
+  
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.6);  /* Semi-transparent background */
+    padding: 15px;  /* Padding for the caption */
+    border-radius: 10px;  /* Rounded corners */
+  }
+  
+  .carousel-caption h5 {
+    font-size: 24px;  /* Font size for heading */
+    font-weight: bold;  /* Bold font */
+    color: #fff;  /* White color for text */
+  }
+  
+  .carousel-caption p {
+    font-size: 16px;  /* Font size for paragraph */
+    color: #f8f9fa;  /* Light color for text */
+  }
+  
+  /* Custom colors for controls */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: #ff4081;  /* Custom color for controls */
+    border-radius: 50%;  /* Rounded controls */
+}
+  
+/* Container for profile layout */
+.profile-box {
+    display: flex;
+    align-items: flex-start; /* Align items at the start */
+    margin-bottom: 30px; /* Space between sections */
+    border: 1px solid #e0e0e0; /* Light border around the profile box */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Inner padding */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+
+/* Profile image styling */
+.profile-image {
+    width: 450px;
+    height: 450px;
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Title styling */
+.profile-title {
+    font-size: 28px; /* Larger font size for title */
+    color: #d63384; /* Color for title */
+    margin-bottom: 10px; /* Space below title */
+}
+
+/* Stars rating styling */
+.stars {
+    color: #ffcc00; /* Gold color for stars */
+    font-size: 20px; /* Size of stars */
+    margin-bottom: 10px; /* Space below stars */
+}
+
+/* Info styling */
+.profile-info {
+    font-size: 18px; /* Font size for info text */
+    margin-bottom: 5px; /* Space below each info item */
+}
+
+/* Additional styles for the rent box */
+.rent-box {
+    border: 1px solid #ccc; /* Light border */
+    padding: 15px; /* Padding inside box */
+    border-radius: 10px; /* Rounded corners */
+    margin-top: 10px; /* Space between boxes */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center vertically */
+    background-color: #f9f9f9; /* Light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.rent-box label {
+    font-weight: bold; /* Bold labels */
+    margin-right: 10px; /* Space between label and input */
+}
+
+.rent-box input[type="number"] {
+    width: 60px; /* Fixed width for the input */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px; /* Padding inside the input */
+    transition: border 0.3s; /* Smooth transition for focus effect */
+    margin-right: 10px; /* Space between input and button */
+}
+
+.rent-box input[type="number"]:focus {
+    border: 1px solid #ff66a3; /* Highlight border color on focus */
+    outline: none; /* Remove outline */
+}
+
+.rent-box .btn {
+    background-color: #ff66a3; /* Primary button color */
+    color: white; /* Button text color */
+    padding: 10px 15px; /* Button padding */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.rent-box .btn:hover {
+    background-color: #ff99c2; /* Lighter button color on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+#total-price {
+    font-weight: bold; /* Make total price bold */
+    margin-top: 10px; /* Space above total price */
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center; /* Center vertically */
+}
+
+.quantity-control .btn {
+    width: 40px; /* Fixed width for buttons */
+    margin: 0 5px; /* Space between buttons and input */
+    height: 35px;
+    display: flex; /* Enable flexbox for centering */
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+}
+
+
+.quantity-input {
+    width: 60px; /* Fixed width for input */
+    text-align: center; /* Center text */
+}
+
+
+/* Rent button styling */
+.btn-primary {
+    background-color: #ff66a3; /* Rent button color */
+    border: none; /* No border */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.btn-primary:hover {
+    background-color: #ff99c2; /* Hover color for rent button */
+}
+
+/* Info box styling */
+.info-box {
+    border: 1px solid #e0e0e0; /* Light border */
+    padding: 15px; /* Padding inside info box */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    margin-top: 20px; /* Space above info box */
+}
+
+    
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-box {
+        flex-direction: column; /* Stack image and details vertically */
+        align-items: center; /* Center items */
+    }
+
+    .profile-image {
+        width: 100%; /* Full width on small screens */
+        height: auto; /* Auto height */
+    }
+
+    .details {
+        margin-left: 0; /* Remove margin on small screens */
+        text-align: center; /* Center text */
+    }
+}
+
+/* Modern Input Styles */
+.modern-input {
+    border: 1px solid #ced4da; /* Light gray border */
+    border-radius: 12px; /* Improved rounded corners */
+    padding: 12px; /* Padding inside input fields */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus effect */
+    font-size: 16px; /* Font size for input */
+    width: 100%; /* Full width for inputs */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.modern-input:focus {
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue shadow on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Textarea Styles */
+textarea.modern-input {
+    max-height: 150px; /* Limit height for textareas */
+    overflow-y: auto; /* Enable vertical scrolling */
+    resize: none; /* Disable resizing of textarea */
+}
+
+/* Form Button Styles */
+.btn-modern {
+    background-color: pink; /* Pink background */
+    border: none; /* No border */
+    color: white; /* White text */
+    padding: 12px 20px; /* Padding */
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.btn-modern:hover {
+    background-color: #e91e63; /* Darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+/* Form Container Styles */
+.form-container {
+    background-color: #ffffff; /* White background for form */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px; /* Padding around the form */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Drag-and-Drop Area Styles */
+.drag-drop-area {
+    border: 2px dashed #007bff; /* Dashed border */
+    border-radius: 12px; /* Rounded corners */
+    height: 200px; /* Height for drag-and-drop area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa; /* Light gray background */
+    transition: background-color 0.3s; /* Smooth transition */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.drag-drop-area:hover {
+    background-color: #e9f1fb; /* Light blue on hover */
+}
+
+/* Price Input Styles */
+.price-input-container {
+    position: relative; /* Position for currency symbol */
+}
+
+.currency-symbol {
+    position: absolute; /* Position currency symbol inside input */
+    left: 10px; /* Position from left */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical alignment */
+    font-size: 16px; /* Font size for the symbol */
+    color: #6c757d; /* Gray color for the symbol */
+}
+
+.price-input {
+    padding-left: 30px; /* Space for currency symbol */
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}

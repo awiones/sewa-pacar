@@ -56,6 +56,15 @@ if (strpos($user_agent, 'Android') !== false || strpos($user_agent, 'iPhone') !=
                     </li>
                 <?php endif; ?>
             </ul>
+
+            <form class="search-form ms-3 me-3" action="search.php" method="GET">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </nav>
 

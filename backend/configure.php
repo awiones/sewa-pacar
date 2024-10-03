@@ -4,11 +4,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start(); // Start the session
 }
 
-$host = 'localhost';
+$host = 'sql12.freesqldatabase.com';
 $port = 3306;
-$db = 'rentgf_db';
-$user = '';
-$pass = '';
+$db = 'sql12734623';
+$user = 'sql12734623';
+$pass = 'bmQJ2dqEc9';
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$db";

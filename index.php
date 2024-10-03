@@ -4,6 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+$stmt = $pdo->query("SELECT * FROM girlfriends WHERE status = 'accepted'");
 
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 if (strpos($user_agent, 'Android') !== false || strpos($user_agent, 'iPhone') !== false) {
@@ -178,7 +179,7 @@ if (strpos($user_agent, 'Android') !== false || strpos($user_agent, 'iPhone') !=
         </div>
     </div>
 
-    <?php include 'bahan/footer.php'; ?>
+    <?php include 'baha n/footer.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

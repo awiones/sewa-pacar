@@ -35,6 +35,12 @@ h1, h2 {
                  0 0 20px #d63384;
 }
 
+.search-form {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 /* Card styling */
 .container {
     padding: 20px; /* Add padding to the container */
@@ -51,6 +57,7 @@ h1, h2 {
     background-color: #fff;
     border: none;
     width: 300px; /* Fixed width for consistency */
+    height: 500px; /* Fixed height for consistency */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     margin-bottom: 20px;
@@ -78,6 +85,9 @@ h1, h2 {
     font-size: 1.25rem; /* Consistent font size for titles */
     font-weight: bold; /* Make title bold */
     text-align: center; /* Center align the title */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .card-body {
@@ -94,6 +104,11 @@ h1, h2 {
     color: #333; /* Dark color for text */
     line-height: 1.5; /* Consistent line spacing */
     text-align: left; /* Align text to the left */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    display: -webkit-box; /* Use for multiline ellipsis */
+    -webkit-line-clamp: 2; /* Limit the number of lines */
+    -webkit-box-orient: vertical; /* Set orientation */
 }
 
 .rating {
@@ -147,6 +162,7 @@ h1, h2 {
         width: 100%;
     }
 }
+
 
 
 /* Sidebar styling */

@@ -29,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     } elseif ($action === 'reject') {
         $stmt = $pdo->prepare("UPDATE girlfriends SET status = 'rejected' WHERE id = ?");
         $stmt->execute([$id]);
-    } elseif ($action === 'delete') {
-        $stmt = $pdo->prepare("DELETE FROM girlfriends WHERE id = ?");
+    } elseif ($action === 'approve') {
+        $stmt = $pdo->prepare("UPDATE girlfriends SET status = 'approved' WHERE id = ?");
         $stmt->execute([$id]);
     }
 
     // Redirect to refresh the page
     header('Location: dashboard-atmin.php');
-    exit();
+    exit;
 }
 
 // Handle editing
@@ -126,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                                 <input type="hidden" name="id" value="<?php echo $application['id']; ?>">
                                 <button type="submit" name="action" value="accept" class="btn btn-success">Accept</button>
                                 <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                                <button type="submit" name="action" value="approve" class="btn btn-primary">Approve</button>
                             </form>
                         </td>
                     </tr>

@@ -1,11 +1,10 @@
 <?php
-include('backend/configure.php');
+require_once 'backend/configure.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start(); 
 }
 
 $upload_success = null;
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get details from the form
@@ -16,26 +15,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = htmlspecialchars($_POST['description']);
     $personality = htmlspecialchars($_POST['personality']);
     $rules = htmlspecialchars($_POST['rules']);
-    $imageData = $_POST['image'];
 
     // Handle the uploaded image data (base64)
-    if (!empty($imageData)) {
-        $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
-        $imageData = str_replace(' ', '+', $imageData);
-        $image = base64_decode($imageData);
-        $image_name = 'gf_' . time() . '.jpg';
-        $image_path = 'images/' . $image_name;
+    if (!empty($_FILES["image"])) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["image"]["name"]);
+        $image_url = "uploads/" . basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        // Save the image to the server
-        if (file_put_contents($image_path, $image)) {
-            // Insert into the database
-            $stmt = $pdo->prepare("INSERT INTO girlfriends (name, age, location, price, description, personality, rules, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$name, $age, $location, $price, $description, $personality, $rules, $image_path]);
-
-            $upload_success = true;
-        } else {
-            $upload_success = false;
+        // Check if image file is a actual image or fake image
+        if (isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            if ($check !== false) {
+                $uploadOk = 1;
+            } else {
+                $uploadOk = 0;
+            }
         }
+
+        // Check file size
+        if ($_FILES["image"]["size"] > 500000) {
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                // Insert into the database with status "pending"
+                $stmt = $pdo->prepare("INSERT INTO girlfriends (name, age, location, price, personality, description, rules, image_url, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')");
+                $stmt->execute([$name, $age, $location, $price, $personality, $description, $rules, $image_url]);
+
+                // Redirect to a success page or back to the form
+                header("Location: index.php");
+                exit;
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+    } else {
+        echo "No file was uploaded.";
     }
 }
 ?>
@@ -57,19 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .form-container {
             flex: 1;
-            margin-right: 50px;
+            margin-right: 40px;
         }
         .drag-drop-area {
-            width: 450px;
-            height: 450px;
-            border: 2px dashed #ddd;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #ddd;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #aaa;
             cursor: pointer;
-            transition: border-color 0.3s ease-in-out;
         }
         .drag-drop-area:hover {
             border-color: #ff66a3;
@@ -116,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .image-upload-container {
             position: relative;
-            width: 450px;
+            width: 100%;
             height: 450px;
             border: 2px solid #ddd;
             border-radius: 10px;
@@ -124,7 +148,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+        }
+        #uploadedImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        #editImage, #deleteImage {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
+
+        #editImage {
+            right: 80px;
         }
         .btn {
             margin-top: 10px;
@@ -139,6 +179,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .cropper-line, 
         .cropper-point {
             cursor: pointer; /* Resize cursors around the edges */
+        }
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 90%; /* Set the container width to 90% on mobile view */
+                margin: 50px auto; /* Center the container */
+            }
+            .form-container {
+                flex: 1;
+                margin-right: 0; /* Remove the margin-right on mobile view */
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .container {
+                width: 95%; /* Set the container width to 95% on smaller mobile screens */
+                margin: 50px auto; /* Center the container */
+            }
+            .form-container {
+                flex: 1;
+                margin-right: 0; /* Remove the margin-right on smaller mobile screens */
+            }
+        }
+
+        @media only screen and (max-width: 320px) {
+            .container {
+                width: 98%; /* Set the container width to 98% on very small mobile screens */
+                margin: 50px auto; /* Center the container */
+            }
+            .form-container {
+                flex: 1;
+                margin-right: 0; /* Remove the margin-right on very small mobile screens */
+            }
         }
     </style>
 </head>
@@ -167,16 +239,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
     <div class="container">
-        <div class="form-container">
-            <h1>Apply to Become a Girlfriend</h1>
-            <?php if ($upload_success === true): ?>
-                <div class="alert alert-success">Your application has been submitted!</div>
-            <?php elseif ($upload_success === false): ?>
-                <div class="alert alert-danger">Image upload failed. Please try again.</div>
-            <?php endif; ?>
-            <form id="gfForm" method="POST" action="process.php" enctype="multipart/form-data">
+    <div class="form-container">
+        <h1>Apply to Become a Girlfriend</h1>
+        <?php if ($upload_success === true): ?>
+        <div class="alert alert-success">Your application has been submitted!</div>
+        <?php elseif ($upload_success === false): ?>
+        <div class="alert alert-danger">Image upload failed. Please try again.</div>
+        <?php endif; ?>
+        <form id="gfForm" method="POST" action="process.php" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="name" class="form-label">Full Name</label>
+                    <label for="name" class="form-label">Name</label>
                     <input type="text" class="form-control modern-input" id="name" name="name" required>
                 </div>
                 <div class="mb-3">
@@ -189,41 +263,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price per Day</label>
-                    <div class="price-input-container">
-                        <span class="currency-symbol">$</span>
-                        <input type="number" class="form-control modern-input price-input" id="price" name="price" required placeholder="0" min="0" step="0.01">
-                    </div>
+                    <input type="number" class="form-control modern-input" id="price" name="price" required min="0" step="0.01">
                 </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control modern-input" id="description" name="description" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="personality" class="form-label">Personality</label>
-                    <textarea class="form-control modern-input" id="personality" name="personality" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="rules" class="form-label">Rules</label>
-                    <textarea class="form-control modern-input" id="rules" name="rules" rows="3" required></textarea>
-                </div>
-                <input type="hidden" name="image" id="imageData">
-                <button type="submit" class="btn btn-modern">Become GF</button>
-            </form>
-        </div>
-        <div class="crop-container">
-            <h2>Upload Picture</h2>
+            </div>
+            <div class="col-md-6">
             <div id="dragDropArea" class="drag-drop-area">
                 Drop here or click me
             </div>
             <div class="image-upload-container" id="imageUploadContainer" style="display: none;">
                 <img id="uploadedImage" src="" alt="Uploaded Image" style="max-width: 100%; height: auto; border-radius: 10px;">
-                <button id="editImage" class="btn btn-warning" style="position: absolute; top: 10px; right: 80px;">Edit</button>
+                <button id="editImage" class="btn btn-warning" style="position: absolute; top: 10px; right: 80px;">Edit</ button>
                 <button id="deleteImage" class="btn btn-danger" style="position: absolute; top: 10px; right: 10px;">Delete</button>
             </div>
-            <img id="croppedImage" alt="Cropped Image" style="display:none;"> <!-- Hidden by default -->
+            </div>
         </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control modern-input" id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="personality" class="form-label">Personality</label>
+            <textarea class="form-control modern-input" id="personality" name="personality" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="rules" class="form-label">Rules</label>
+            <textarea class="form-control modern-input" id="rules" name="rules" rows="3" required></textarea>
+        </div>
+        <input type="hidden" name="image" id="imageData">
+        <button type="submit" class="btn btn-modern">Become GF</button>
+        </form>
     </div>
-
+    </div>
 
     <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -382,10 +452,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
             const imageSrc = canvas.toDataURL('image/jpeg', 1.0);
 
-            croppedImage.src = imageSrc;
+            uploadedImage.src = imageSrc;
             imageDataInput.value = imageSrc;
 
-            uploadedImage.src = imageSrc;
             imageUploadContainer.style.display = 'block';
 
             dragDropArea.style.display = 'none'; // Hide the drag-and-drop area
@@ -403,7 +472,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         deleteImageButton.addEventListener('click', () => {
             uploadedImage.src = '';
             imageDataInput.value = '';
-            croppedImage.style.display = 'none';
             imageUploadContainer.style.display = 'none';
             submitButton.style.display = 'none';
 

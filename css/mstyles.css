@@ -1,18 +1,19 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fff0f6; /* Soft pink background */
+    background-color: #fff0f6;
     color: #333;
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    color: #d63384; /* Pink color for headings */
+    color: #d63384;
     margin-top: 20px;
 }
 
 .navbar {
-    background-color: #ffccff; /* Light pink background for the navbar */
+    background-color: #ffccff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for navbar */
 }
 
 .navbar-brand {
@@ -20,59 +21,47 @@ h1 {
     color: #fff;
 }
 
-.navbar-nav {
-    margin-left: auto; /* Push the navbar items to the right */
-}
-
 .nav-link {
-    color: #ff66b3; /* Pink color for the links */
-    margin-left: 20px; /* Space between links */
-    font-weight: bold; /* Make the links bold */
+    color: #ff66b3;
+    margin-left: 20px;
+    font-weight: bold;
 }
 
 .nav-link:hover {
-    color: #ff3399; /* Darker pink on hover */
+    color: #ff3399;
 }
 
-/* Sub-bar Styling */
+/* Sub-bar styling */
 .sub-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px; /* Spacing below the sub-bar */
-    padding: 10px; /* Padding for the sub-bar */
-    background-color: #ffb3d9; /* Light pink background for sub-bar */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    background-color: #ffb3d9; /* Light pink background for the sub-bar */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-bottom: 15px; /* Space between sub-bar and content below */
 }
 
 .btn-group .btn {
     background-color: #ff66a3; /* Pink button background */
     border: none;
-    flex: 1; /* Make buttons equal width */
-    margin: 0 5px; /* Spacing between buttons */
+    margin-right: 10px;
     border-radius: 8px; /* Rounded corners for buttons */
-    transition: background-color 0.3s; /* Transition effect */
+    transition: background-color 0.3s ease;
 }
 
 .btn-group .btn:hover {
     background-color: #ff99c2; /* Lighter pink on hover */
 }
 
-/* Search Bar Styling */
 .search-bar {
-    margin-left: 10px; /* Spacing to the left of the search bar */
-    border: 2px solid #d63384; /* Pink border */
+    border: 2px solid #d63384; /* Pink border for the search bar */
     border-radius: 8px; /* Rounded corners */
-    padding: 5px 10px; /* Padding inside the search bar */
-    width: 50%; /* Width of the search bar */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for search bar */
-    transition: border-color 0.3s; /* Transition for border color */
+    padding: 5px 10px;
+    transition: border-color 0.3s ease;
 }
 
 .search-bar:focus {
-    outline: none; /* Remove default outline */
-    border-color: #ff66a3; /* Change border color on focus */
+    outline: none;
+    border-color: #ff66a3; /* Lighter border when focused */
 }
 
 /* Card Styling */
@@ -81,8 +70,20 @@ h1 {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Spacing between cards */
+    margin-bottom: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-title {
+    margin-bottom: 10px; /* Spacing under the title */
 }
 
 .card:hover {
@@ -92,35 +93,49 @@ h1 {
 
 .card img {
     width: 100%;
-    height: 200px; 
+    height: 200px;
     object-fit: cover;
-    border-radius: 10px 10px 0 0; /* Rounded corners for the top */
+    border-radius: 10px 10px 0 0;
 }
 
 .card h5 {
-    color: #d63384; /* Title color */
+    color: #d63384;
 }
 
 .btn-primary {
-    background-color: #ff66a3; /* Button color */
-    border: none;
+    width: 100%; /* Make the button full width */
+    max-width: 150px; /* Set a maximum width */
+    text-align: center; /* Center the button text */
+    background-color: #ff99c2;
 }
 
 .btn-primary:hover {
-    background-color: #ff99c2; /* Button hover color */
+    background-color: #ff99c2;
 }
 
-/* Card Wrapper Styles */
 .card-wrapper {
-    padding: 15px; /* Padding around cards */
+    padding: 15px;
 }
 
-.col-4 {
-    padding: 5px; /* Spacing around each card */
+.col-4, .col-md-6 {
+    padding: 5px;
 }
 
 @media (max-width: 576px) {
     .card {
-        margin-bottom: 15px; /* Reduce margin on smaller screens */
+        margin-bottom: 15px;
     }
+    .card img {
+        height: 150px;
+    }
+}
+
+/* Rating stars */
+.rating .fas, 
+.rating .far {
+    color: #ffc107; /* Yellow color for the stars */
+}
+
+.rating .fa-star-half-alt {
+    color: #ffc107; /* Ensure the half-star is yellow as well */
 }
